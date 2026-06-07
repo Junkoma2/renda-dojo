@@ -166,3 +166,14 @@ footer a {
 }
 
 footer a:hover { color: var(--text); }
+
+/* ready画面のスタートボタン: 塗りつぶしで「押し始め」感を出す */
+#start-btn {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+#start-btn:active {
+  background: rgba(232, 255, 0, .8);
+  color: var(--bg);
+}
