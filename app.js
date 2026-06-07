@@ -52,7 +52,9 @@ function startGame() {
 }
 
 function endGame() {
+  if (!running) return;
   clearInterval(intervalId);
+  intervalId = null;
   running = false;
   resultCount.textContent = count;
   resultReaction.textContent = reaction(count);
@@ -70,7 +72,7 @@ function tap() {
 
 startBtn.addEventListener("click", startGame);
 tapBtn.addEventListener("click", tap);
-retryBtn.addEventListener("click", () => showScreen("ready"));
+retryBtn.addEventListener("click", startGame);
 
 // スペースキーでもタップ可能
 document.addEventListener("keydown", (e) => {
