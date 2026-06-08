@@ -1,5 +1,5 @@
 const DURATION = 10;
-const BEST_KEY = "rendan-dojo-best";
+const BEST_KEY = "renda-dojo-best";
 
 const screens = {
   ready:     document.getElementById("screen-ready"),
@@ -126,9 +126,10 @@ startBtn.addEventListener("click", startCountdown);
 tapBtn.addEventListener("click", tap);
 retryBtn.addEventListener("click", startCountdown);
 
+// スペースキーはゲーム中のみスクロール抑制して連打カウント
 document.addEventListener("keydown", (e) => {
-  if (e.code === "Space" && !e.repeat) {
+  if (e.code === "Space" && !e.repeat && running) {
     e.preventDefault();
-    if (running) tap();
+    tap();
   }
 });
