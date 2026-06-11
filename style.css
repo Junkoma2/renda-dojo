@@ -261,3 +261,12 @@ footer a:hover { color: var(--text); }
   z-index: 1;
   font-variant-numeric: tabular-nums;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .tap-btn {
+    transition: none;
+  }
+  .countdown-ring {
+    animation: none;
+  }
+}
