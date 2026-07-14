@@ -131,5 +131,20 @@ document.addEventListener("keydown", (e) => {
   if (e.code === "Space" && !e.repeat && running) {
     e.preventDefault();
     tap();
+    return;
+  }
+
+  // 結果画面ではEnter/Spaceで再挑戦できるようにする
+  // （resultReactionはスクリーンリーダー通知用にフォーカスするだけの非インタラクティブ要素のため、
+  //   ネイティブのボタン活性化に頼らずここでキー入力を拾う。
+  //   retryBtnにフォーカスがある場合はボタン自身のclickで処理されるため二重起動を避ける）
+  if (
+    (e.code === "Space" || e.key === "Enter") &&
+    !e.repeat &&
+    !screens.result.hidden &&
+    e.target !== retryBtn
+  ) {
+    e.preventDefault();
+    startCountdown();
   }
 });
