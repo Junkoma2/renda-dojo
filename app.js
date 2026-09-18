@@ -26,13 +26,23 @@ let remaining = DURATION;
 let intervalId = null;
 let running = false;
 
+// localStorageが使えない・値が壊れている場合も最高記録0としてゲームを継続する
 function getBest() {
-  return parseInt(localStorage.getItem(BEST_KEY) || "0", 10);
+  try {
+    const n = Number.parseInt(localStorage.getItem(BEST_KEY) || "0", 10);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  } catch {
+    return 0;
+  }
 }
 
 function saveBest(score) {
   if (score > getBest()) {
-    localStorage.setItem(BEST_KEY, String(score));
+    try {
+      localStorage.setItem(BEST_KEY, String(score));
+    } catch {
+      // 保存できなくても今回の結果表示は続ける
+    }
     return true;
   }
   return false;
